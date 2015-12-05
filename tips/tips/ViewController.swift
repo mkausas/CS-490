@@ -14,21 +14,69 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
+    @IBOutlet weak var splitTwoLabel: UILabel!
+    @IBOutlet weak var splitThreeLabel: UILabel!
+    @IBOutlet weak var tipperLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    
-        tipLabel.text = "$0.00"
-        totalLabel.text = "$0.00"
         
+        // add top logo
+        let logoTitle = UIImage(named: "logo.png")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .ScaleAspectFit
+        imageView.image = logoTitle
+        self.navigationItem.titleView = imageView
     
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+
+        // load old cash amount from memory if it exists
+        if let bill = defaults.objectForKey("bill") {
+            billField.text = bill as? String
+            
+            tipLabel.text = defaults.objectForKey("tip") as? String
+            totalLabel.text = defaults.objectForKey("total") as? String
+//            splitTwoLabel.text = "\(Double(totalLabel.text!)! / 2)"
+//            splitTwoLabel.text = "\(Double(totalLabel.text!)! / 3)"
+        }
+        
+        else {
+            billField.text = "$"
+            
+            tipLabel.text = "$0"
+            totalLabel.text = "$0"
+            splitTwoLabel.text = "$0"
+            splitThreeLabel.text = "$0"
+        }
     }
 
+    override func viewWillAppear(animated: Bool) {
+        // reset tip percentages based on settings choice
+        var tipPercentages = selectedService.1
+        tipControl.removeAllSegments()
+        tipControl.insertSegmentWithTitle("\(tipPercentages[2])%", atIndex: 0, animated: false)
+        tipControl.insertSegmentWithTitle("\(tipPercentages[1])%", atIndex: 0, animated: false)
+        tipControl.insertSegmentWithTitle("\(tipPercentages[0])%", atIndex: 0, animated: false)
+        tipControl.selectedSegmentIndex = 1
+        
+        // Optionally initialize the property to a desired starting value
+        self.tipControl.alpha = 0
+//        self.secondView.alpha = 1
+        UIView.animateWithDuration(1, animations: {
+            self.tipControl.alpha = 1
+//            self.secondView.alpha = 0
+        })
+    
+        tipperLabel.text = selectedService.0
+
+    }
+    
+    
     
     // calculate tips and total
     @IBAction func onEditingChanged(sender: AnyObject) {
-        var tipPercentages = [0.18, 0.2, 0.22]
+        let tipPercentages = selectedService.1
         
         // declare one time use variables
         let billAmount: Double
@@ -40,20 +88,30 @@ class ViewController: UIViewController {
         // user has entered valid input
         if billField.text?.isEmpty == false {
             billAmount = Double(billField.text!)!
-            tip = billAmount * tipPercentage;
+            tip = billAmount * tipPercentage * 0.01;
             total = billAmount + tip;
         }
         
         // user has not entered input
         else {
+            billAmount = 0
             tip = 0
             total = 0
         }
         
-        
         // assign new values to correct labels with additional formatting 
         tipLabel.text = String(format: "$%.2f", arguments: [tip])
         totalLabel.text = String(format: "$%.2f", arguments: [total])
+        splitTwoLabel.text = String(format: "$%.2f", arguments: [total / 2])
+        splitThreeLabel.text = String(format: "$%.2f", arguments: [total / 3])
+        
+        
+        // save values in case user closes app
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(String(billAmount), forKey: "bill")
+        defaults.setObject(tipLabel.text, forKey: "tip")
+        defaults.setObject(totalLabel.text, forKey: "total")
+        defaults.synchronize()
         
     }
     

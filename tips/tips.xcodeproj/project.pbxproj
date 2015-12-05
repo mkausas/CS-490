@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BDCD69761C127A6F005E3D1F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCD69751C127A6F005E3D1F /* SettingsViewController.swift */; };
+		BD7689381C12868A0084626B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7689371C12868A0084626B /* SettingsViewController.swift */; };
 		BDCFF9481C125A0700D1DABA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFF9471C125A0700D1DABA /* AppDelegate.swift */; };
 		BDCFF94A1C125A0700D1DABA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFF9491C125A0700D1DABA /* ViewController.swift */; };
 		BDCFF94D1C125A0700D1DABA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDCFF94B1C125A0700D1DABA /* Main.storyboard */; };
@@ -35,7 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BDCD69751C127A6F005E3D1F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BD7689371C12868A0084626B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BDCFF9441C125A0700D1DABA /* tips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCFF9471C125A0700D1DABA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDCFF9491C125A0700D1DABA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,8 +101,8 @@
 			children = (
 				BDCFF9471C125A0700D1DABA /* AppDelegate.swift */,
 				BDCFF9491C125A0700D1DABA /* ViewController.swift */,
-				BDCD69751C127A6F005E3D1F /* SettingsViewController.swift */,
 				BDCFF94B1C125A0700D1DABA /* Main.storyboard */,
+				BD7689371C12868A0084626B /* SettingsViewController.swift */,
 				BDCFF94E1C125A0700D1DABA /* Assets.xcassets */,
 				BDCFF9501C125A0700D1DABA /* LaunchScreen.storyboard */,
 				BDCFF9531C125A0700D1DABA /* Info.plist */,
@@ -261,7 +261,7 @@
 			files = (
 				BDCFF94A1C125A0700D1DABA /* ViewController.swift in Sources */,
 				BDCFF9481C125A0700D1DABA /* AppDelegate.swift in Sources */,
-				BDCD69761C127A6F005E3D1F /* SettingsViewController.swift in Sources */,
+				BD7689381C12868A0084626B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
