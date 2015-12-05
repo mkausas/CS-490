@@ -10,16 +10,18 @@ import UIKit
 
 
 
-var selectedService: (String, [Double]) = ("bartender", [15, 17, 19])
+var selectedService: (String, [Double]) = ("taxi", [11, 13, 15])
+var defaultTipPrice = 1
 
 class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var servicePicker: UIPickerView!
+    @IBOutlet weak var tipTypePicker: UISegmentedControl!
     
     // http://money.cnn.com/pf/features/lists/tipping/
     var serviceNames: [String] = ["bartender", "waiter", "wine steward", "taxi", "food delivery", "barber", "hairdresser"]
     
-    var serviceTips: [[Double]] = [[15, 17, 19], [18, 20, 22], [13, 15, 17], [11, 13, 15], [10, 15, 2], [15, 17.5, 2], [15, 17.5, 20]];
+    var serviceTips: [[Double]] = [[15, 17, 19], [18, 20, 22], [13, 15, 17], [11, 13, 15], [10, 15, 2], [15, 17.5, 20], [15, 17.5, 20]];
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewWillAppear(animated: Bool) {
         servicePicker.selectRow(serviceNames.count / 2, inComponent: 0, animated: false)
+        tipTypePicker.selectedSegmentIndex = defaultTipPrice
     }
 
     func pickerView(pickerView: UIPickerView,
@@ -50,6 +53,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func changeTipType(sender: AnyObject) {
+        defaultTipPrice = tipTypePicker.selectedSegmentIndex
+    }
     
     // The number of columns of data
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

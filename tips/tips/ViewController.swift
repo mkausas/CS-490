@@ -38,8 +38,8 @@ class ViewController: UIViewController {
             
             tipLabel.text = defaults.objectForKey("tip") as? String
             totalLabel.text = defaults.objectForKey("total") as? String
-//            splitTwoLabel.text = "\(Double(totalLabel.text!)! / 2)"
-//            splitTwoLabel.text = "\(Double(totalLabel.text!)! / 3)"
+            splitTwoLabel.text = defaults.objectForKey("splitTwo") as? String
+            splitThreeLabel.text = defaults.objectForKey("splitThree") as? String
         }
         
         else {
@@ -74,12 +74,15 @@ class ViewController: UIViewController {
             self.bottomHalfView.alpha = 1
         })
         
+        tipperLabel.text = selectedService.0
+        tipControl.selectedSegmentIndex = defaultTipPrice
 
         
-        tipperLabel.text = selectedService.0
-
     }
     
+    override func viewDidAppear(animated: Bool) {
+        billField.becomeFirstResponder()
+    }
     
     
     // calculate tips and total
@@ -119,6 +122,8 @@ class ViewController: UIViewController {
         defaults.setObject(String(billAmount), forKey: "bill")
         defaults.setObject(tipLabel.text, forKey: "tip")
         defaults.setObject(totalLabel.text, forKey: "total")
+        defaults.setObject(splitTwoLabel.text, forKey: "splitTwo")
+        defaults.setObject(splitThreeLabel.text, forKey: "splitThree")
         defaults.synchronize()
         
     }
