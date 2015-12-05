@@ -133,6 +133,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="billField" destination="oIu-MN-9XL" id="4JT-J5-MtZ"/>
+                        <outlet property="bottomHalfView" destination="cHi-zr-azj" id="eqQ-wV-hN6"/>
                         <outlet property="splitThreeLabel" destination="UAc-Tk-q62" id="Mim-zl-5bU"/>
                         <outlet property="splitTwoLabel" destination="1cu-Fl-aMM" id="c4a-Vm-n6f"/>
                         <outlet property="tipControl" destination="uO3-8B-gPS" id="0p0-wD-9su"/>

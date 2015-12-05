@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var splitTwoLabel: UILabel!
     @IBOutlet weak var splitThreeLabel: UILabel!
     @IBOutlet weak var tipperLabel: UILabel!
+    @IBOutlet weak var bottomHalfView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,14 +61,21 @@ class ViewController: UIViewController {
         tipControl.insertSegmentWithTitle("\(tipPercentages[0])%", atIndex: 0, animated: false)
         tipControl.selectedSegmentIndex = 1
         
-        // Optionally initialize the property to a desired starting value
+        self.billField.center.y = self.view.center.y
+        UIView.animateWithDuration(0.5, animations: {
+            self.billField.center.y = 120
+            
+        })
+        
         self.tipControl.alpha = 0
-//        self.secondView.alpha = 1
+        self.bottomHalfView.alpha = 0
         UIView.animateWithDuration(1, animations: {
             self.tipControl.alpha = 1
-//            self.secondView.alpha = 0
+            self.bottomHalfView.alpha = 1
         })
-    
+        
+
+        
         tipperLabel.text = selectedService.0
 
     }
