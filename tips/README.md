@@ -33,7 +33,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/mkausas/CS-490/tree/master/tips/tips.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![alt tag](https://github.com/mkausas/CS-490/tree/master/tips/tips.gif)
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
