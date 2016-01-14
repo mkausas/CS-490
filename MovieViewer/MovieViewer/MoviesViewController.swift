@@ -28,6 +28,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
 
+        dispatch_async(dispatch_get_main_queue()) {
+            KVNProgress.show()
+        }
+        retrieveMovieInfo()
+        
         
     }
     
@@ -50,6 +55,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             
                             self.movies = responseDictionary["results"] as? [NSDictionary]
                             self.tableView.reloadData() // repopulate talble data
+                            
+                            KVNProgress.showSuccess()
                     }
                 }
         });
