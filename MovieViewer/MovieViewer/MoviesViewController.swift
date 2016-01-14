@@ -27,7 +27,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
+
         
+    }
+    
+    func retrieveMovieInfo() {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
@@ -50,9 +54,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 }
         });
         task.resume()
-        
-
-        
     }
     
     
@@ -66,9 +67,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func onRefresh() {
-        delay(2, closure: {
+        retrieveMovieInfo()
+        delay(0.2) { () -> () in
             self.refreshControl.endRefreshing()
-        })
+        }
     }
 
     
