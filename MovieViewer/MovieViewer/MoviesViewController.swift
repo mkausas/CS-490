@@ -33,7 +33,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         retrieveMovieInfo()
         
-        
     }
     
     func retrieveMovieInfo() {
