@@ -10,6 +10,8 @@ import UIKit
 import AFNetworking
 import KVNProgress
 
+var selectedMovie: NSDictionary?
+
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
@@ -107,7 +109,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let imageUrl = NSURL(string: baseUrl + posterPath)
         
-        
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         cell.posterView.setImageWithURL(imageUrl!)
@@ -115,6 +116,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         print("row \(indexPath.row)")
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("Selected \(indexPath.row)")
+        
+        selectedMovie = movies![indexPath.row]
+    }
+    
+    
+
 
 
     
