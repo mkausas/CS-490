@@ -2,7 +2,7 @@
 
 **Flicks** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: 5 hours spent in total
 
 ## User Stories
 
@@ -38,7 +38,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-TBD: Describe any challenges encountered while building the app.
+Issues included using the KVN pods as they would not run in the main thread if I tried activating them in viewDidLoad, tabviewcontroller and navigationcontroller were not playing nicely together, and it was my first time using collectionviews. 
 
 ## License
 
