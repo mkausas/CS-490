@@ -11,6 +11,7 @@ import AFNetworking
 import KVNProgress
 
 var selectedMovie: NSDictionary?
+var movies: [NSDictionary]?
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -18,7 +19,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
     
-    var movies: [NSDictionary]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                         data, options:[]) as? NSDictionary {
                             NSLog("response: \(responseDictionary)")
                             
-                            self.movies = responseDictionary["results"] as? [NSDictionary]
+                            movies = responseDictionary["results"] as? [NSDictionary]
                             self.tableView.reloadData() // repopulate talble data
                             
                             KVNProgress.showSuccess()

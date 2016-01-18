@@ -23,13 +23,16 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] Each video has a more info page
+- [X] Percentage ratings with color changes
+- [X] Displays lang
+- [ ] Allows for viewing of tableview and collecition view modes (in progress)
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-Not yet created.
+![alt tag](https://raw.githubusercontent.com/mkausas/CS-490/master/MovieViewer/demo.gif "Video Walkthrough")
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
