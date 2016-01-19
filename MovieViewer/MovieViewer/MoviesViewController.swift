@@ -122,10 +122,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         selectedMovie = movies![indexPath.row]
     }
-    
-    
-
-
 
     
 

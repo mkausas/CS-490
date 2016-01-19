@@ -18,8 +18,6 @@ class BigMoviesViewController: UIViewController, UICollectionViewDataSource, UIC
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        var nib = UINib(nibName: "CollectionMovieCell", bundle:nil)
-        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "CollectionMovieCell")
         
         retrieveMovieInfo()
     }
