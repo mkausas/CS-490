@@ -21,6 +21,9 @@ class SingleMovieViewController: UIViewController {
     override func viewDidLoad() {
         print("loaded new stuff")
         
+        self.tabBarController?.tabBar.hidden = true
+
+        
         if let movie = selectedMovie {
             let title = movie["title"] as! String
             let overview = movie["overview"] as! String

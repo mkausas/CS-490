@@ -66,7 +66,7 @@
             </objects>
             <point key="canvasLocation" x="1333" y="417"/>
         </scene>
-        <!--Item-->
+        <!--Poster-->
         <scene sceneID="ibO-cJ-923">
             <objects>
                 <viewController id="RtU-G7-Xin" customClass="BigMoviesViewController" customModule="MovieViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -111,7 +111,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="1B1-db-9N2"/>
+                    <tabBarItem key="tabBarItem" title="Poster" id="1B1-db-9N2"/>
                     <connections>
                         <outlet property="collectionView" destination="304-Rd-f4P" id="FvH-gR-SLb"/>
                     </connections>
@@ -198,11 +198,11 @@
             </objects>
             <point key="canvasLocation" x="1821" y="417"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="3m8-2B-bSO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uvy-Pw-eCw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="sbk-WS-CaV"/>
+                    <tabBarItem key="tabBarItem" title="List" id="sbk-WS-CaV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="q9C-rk-pkh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

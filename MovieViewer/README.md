@@ -16,17 +16,17 @@ The following **required** functionality is complete:
 The following **optional** features are implemented:
 
 - [ ] User sees an error message when there's a networking error.
-- [ ] Movies are displayed using a CollectionView instead of a TableView.
+- [X] Movies are displayed using a CollectionView instead of a TableView.
 - [ ] User can search for a movie.
 - [ ] All images fade in as they are loading.
-- [ ] Customize the UI.
+- [X] Customize the UI.
 
 The following **additional** features are implemented:
 
 - [X] Each video has a more info page
 - [X] Percentage ratings with color changes
 - [X] Displays lang
-- [ ] Allows for viewing of tableview and collecition view modes (in progress)
+- [X] Allows for viewing of tableview and collecition view modes
 
 ## Video Walkthrough 
 
