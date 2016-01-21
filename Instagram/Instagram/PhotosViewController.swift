@@ -22,7 +22,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.rowHeight = 320
+        tableView.rowHeight = 420
         
         let clientId = "e05c462ebd86446ea48a5af73769b602"
         let url = NSURL(string:"https://api.instagram.com/v1/media/popular?client_id=\(clientId)")
@@ -66,12 +66,22 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         let userName = user!["username"] as! String
-        let profileURLString = imageContent.valueForKey("images")?.valueForKey("thumbnail")?.valueForKey("url") as! String
+        let profileURLString = user!.valueForKey("profile_picture") as! String
         let profilePicUrl = NSURL(string: profileURLString)
+        let postURLString = imageContent.valueForKey("images")?.valueForKey("standard_resolution")?.valueForKey("url") as! String
+        let postPicUrl = NSURL(string: postURLString)
+        let likes = imageContent.valueForKey("likes")?.valueForKey("count") as! Int
         
         
         cell.profileImage.setImageWithURL(profilePicUrl!)
+        cell.profileImage.clipsToBounds = true
+        cell.profileImage.layer.cornerRadius = 20;
+        cell.profileImage.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).CGColor
+        cell.profileImage.layer.borderWidth = 1;
+        
+        cell.postImage.setImageWithURL(postPicUrl!)
         cell.userName.text = userName
+        cell.likes.text = "\(likes) likes"
         
         
         return cell
