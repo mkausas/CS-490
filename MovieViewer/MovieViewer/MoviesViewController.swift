@@ -13,11 +13,14 @@ import KVNProgress
 var selectedMovie: NSDictionary?
 var movies: [NSDictionary]?
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var filteredData: [NSDictionary]?
     
     
     override func viewDidLoad() {
@@ -27,6 +30,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.dataSource = self
         tableView.delegate = self
+        searchBar.delegate = self
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -61,6 +65,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             NSLog("response: \(responseDictionary)")
                             
                             movies = responseDictionary["results"] as? [NSDictionary]
+                            self.filteredData = movies
                             self.tableView.reloadData() // repopulate talble data
                             
                             KVNProgress.showSuccess()
@@ -94,8 +99,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let movies = movies {
-            return movies.count
+        if let filteredData = filteredData {
+            return filteredData.count
         } else {
             return 0
         }
@@ -106,7 +111,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
-        let movie = movies![indexPath.row]
+        let movie = filteredData![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         let posterPath = movie["poster_path"] as! String
@@ -119,14 +124,25 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.overviewLabel.text = overview
         cell.posterView.setImageWithURL(imageUrl!)
         
-        print("row \(indexPath.row)")
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("Selected \(indexPath.row)")
         
-        selectedMovie = movies![indexPath.row]
+        selectedMovie = filteredData![indexPath.row]
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print("happening")
+        filteredData = searchText.isEmpty ? movies : movies!.filter({(currMovie: NSDictionary) -> Bool in
+            if let title = currMovie["title"] as? String {
+                return title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+            }
+            return false
+        })
+        
+        tableView.reloadData()
     }
 
     
