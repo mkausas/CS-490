@@ -16,7 +16,9 @@ class SingleMovieViewController: UIViewController {
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var langLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var infoView: UIView!
     var movie: NSDictionary?
     
     
@@ -25,17 +27,20 @@ class SingleMovieViewController: UIViewController {
         
         self.tabBarController?.tabBar.hidden = true
 
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: infoView.frame.origin.y + infoView.frame.height)
         
         if let movie = movie {
             let title = movie["title"] as! String
             let overview = movie["overview"] as! String
-            let posterPath = movie["poster_path"] as! String
             let lang = movie["original_language"] as! String
             let rating = movie["vote_average"] as! CGFloat
             
-            let baseUrl = "http://image.tmdb.org/t/p/w500"
             
-            let imageUrl = NSURL(string: baseUrl + posterPath)
+            if let posterPath = movie["poster_path"] as? String {
+                let baseUrl = "http://image.tmdb.org/t/p/w500"
+                let imageUrl = NSURL(string: baseUrl + posterPath)
+                posterView.setImageWithURL(imageUrl!)
+            }
             
             let multiplier = CGFloat(1 / 10.0)
             var red: CGFloat = multiplier
@@ -55,10 +60,11 @@ class SingleMovieViewController: UIViewController {
             titleLabel.text = title
             descriptionLabel.text = overview
             descriptionLabel.sizeToFit()
-            posterView.setImageWithURL(imageUrl!)
             langLabel.text = "Lang: \(lang)"
             ratingLabel.text = "Rating: \(rating * 10)%"
             
+            descriptionLabel.sizeToFit()
+            infoView.sizeToFit()
         }
     }
     
