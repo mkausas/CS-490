@@ -17,6 +17,8 @@ class SingleMovieViewController: UIViewController {
     @IBOutlet weak var langLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     
+    var movie: NSDictionary?
+    
     
     override func viewDidLoad() {
         print("loaded new stuff")
@@ -24,7 +26,7 @@ class SingleMovieViewController: UIViewController {
         self.tabBarController?.tabBar.hidden = true
 
         
-        if let movie = selectedMovie {
+        if let movie = movie {
             let title = movie["title"] as! String
             let overview = movie["overview"] as! String
             let posterPath = movie["poster_path"] as! String
@@ -45,7 +47,6 @@ class SingleMovieViewController: UIViewController {
 
             let green: CGFloat = rating * multiplier / 1.5
             
-            print("red = \(red) green = \(green)")
             let ratingColor = UIColor(red: red, green: green, blue: 0, alpha: 1)
             ratingLabel.backgroundColor = ratingColor
             ratingLabel.layer.cornerRadius = 5
@@ -55,8 +56,8 @@ class SingleMovieViewController: UIViewController {
             descriptionLabel.text = overview
             descriptionLabel.sizeToFit()
             posterView.setImageWithURL(imageUrl!)
-            langLabel.text = lang
-            ratingLabel.text = "\(rating * 10)%"
+            langLabel.text = "Lang: \(lang)"
+            ratingLabel.text = "Rating: \(rating * 10)%"
             
         }
     }

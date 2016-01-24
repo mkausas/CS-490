@@ -86,7 +86,7 @@
 		BDFA78681C4756590015C4BA /* MovieViewer */ = {
 			isa = PBXGroup;
 			children = (
-				BDFA78801C475FF20015C4BA /* view controllers */,
+				BDFA78801C475FF20015C4BA /* View Controllers */,
 				BDFA787D1C475FC80015C4BA /* Views */,
 				BDFA78691C4756590015C4BA /* AppDelegate.swift */,
 				BDFA786D1C4756590015C4BA /* Main.storyboard */,
@@ -106,14 +106,14 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		BDFA78801C475FF20015C4BA /* view controllers */ = {
+		BDFA78801C475FF20015C4BA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BD0E09511C4CACC100920363 /* BigMoviesViewController.swift */,
 				BDFA787B1C4756CC0015C4BA /* MoviesViewController.swift */,
 				BD0E094D1C4C965100920363 /* SingleMovieViewController.swift */,
 			);
-			name = "view controllers";
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

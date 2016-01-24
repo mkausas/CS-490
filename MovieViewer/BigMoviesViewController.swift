@@ -12,6 +12,8 @@ class BigMoviesViewController: UIViewController, UICollectionViewDataSource, UIC
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var movies: [NSDictionary]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +42,7 @@ class BigMoviesViewController: UIViewController, UICollectionViewDataSource, UIC
                         data, options:[]) as? NSDictionary {
                             NSLog("response: \(responseDictionary)")
                             
-                            movies = responseDictionary["results"] as? [NSDictionary]
+                            self.movies = responseDictionary["results"] as? [NSDictionary]
                             self.collectionView.reloadData() // repopulate talble data
                     }
                 }
@@ -49,8 +51,11 @@ class BigMoviesViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies!.count
+        if let movies = movies {
+            return movies.count
+        }
         
+        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

@@ -10,8 +10,6 @@ import UIKit
 import AFNetworking
 import KVNProgress
 
-var selectedMovie: NSDictionary?
-var movies: [NSDictionary]?
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
@@ -19,6 +17,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    var movies: [NSDictionary]?
+
     
     var filteredData: [NSDictionary]?
     
@@ -64,8 +65,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                         data, options:[]) as? NSDictionary {
                             NSLog("response: \(responseDictionary)")
                             
-                            movies = responseDictionary["results"] as? [NSDictionary]
-                            self.filteredData = movies
+                            self.movies = responseDictionary["results"] as? [NSDictionary]
+                            self.filteredData = self.movies
                             self.tableView.reloadData() // repopulate talble data
                             
                             KVNProgress.showSuccess()
@@ -126,13 +127,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Selected \(indexPath.row)")
         
-        selectedMovie = filteredData![indexPath.row]
-    }
-    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print("happening")
         filteredData = searchText.isEmpty ? movies : movies!.filter({(currMovie: NSDictionary) -> Bool in
@@ -147,14 +142,18 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
+    
+        let singleMovieViewController = segue.destinationViewController as! SingleMovieViewController
+        singleMovieViewController.movie = movies![indexPath!.row]
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
