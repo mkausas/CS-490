@@ -27,7 +27,7 @@ class SingleMovieViewController: UIViewController {
         
         self.tabBarController?.tabBar.hidden = true
 
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: infoView.frame.origin.y + infoView.frame.height)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: infoView.frame.origin.y + infoView.frame.height/2)
         
         if let movie = movie {
             let title = movie["title"] as! String
