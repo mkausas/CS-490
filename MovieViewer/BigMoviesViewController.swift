@@ -66,7 +66,29 @@ class BigMoviesViewController: UIViewController, UICollectionViewDataSource, UIC
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         let imageUrl = NSURL(string: baseUrl + posterPath)
 
-        cell.movieView.setImageWithURL(imageUrl!)
+//        cell.movieView.setImageWithURL(imageUrl!)
+        // fade in of images
+        cell.movieView.setImageWithURLRequest(
+            NSURLRequest(URL: imageUrl!),
+            placeholderImage: nil,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                // imageResponse will be nil if the image is cached
+                if imageResponse != nil {
+                    print("Image was NOT cached, fade in image")
+                    cell.movieView.alpha = 0.0
+                    cell.movieView.image = image
+                    UIView.animateWithDuration(1, animations: { () -> Void in
+                        cell.movieView.alpha = 1.0
+                    })
+                } else {
+                    print("Image was cached so just update the image")
+                    cell.movieView.image = image
+                }
+            },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+                // do something for the failure condition
+        })
 
         
         

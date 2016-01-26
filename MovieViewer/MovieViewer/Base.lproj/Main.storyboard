@@ -27,7 +27,7 @@
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="114" id="5wS-4i-W3b" customClass="MovieCell" customModule="MovieViewer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="114"/>
+                                        <rect key="frame" x="0.0" y="136" width="320" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5wS-4i-W3b" id="iSP-U4-N4k">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="113.5"/>
@@ -63,11 +63,29 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" id="6q9-2K-H1R">
+                                <rect key="frame" x="0.0" y="106" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tV8-Bv-d48">
+                                        <rect key="frame" x="112" y="10" width="96" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Network Error">
+                                            <color key="titleColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="refreshNetworkError:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ljb-H9-9a5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Flicks" id="lV4-gk-UUb"/>
                     <connections>
+                        <outlet property="networkErrorView" destination="6q9-2K-H1R" id="8Ix-PI-Wdf"/>
                         <outlet property="searchBar" destination="rcn-qS-LSm" id="xcG-zf-Yrx"/>
                         <outlet property="tableView" destination="lhr-Sc-gNv" id="1hE-iL-fjP"/>
                     </connections>
@@ -108,6 +126,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                         <connections>
                                             <outlet property="movieView" destination="x55-cW-wt7" id="Ii7-mZ-yI7"/>
                                         </connections>
