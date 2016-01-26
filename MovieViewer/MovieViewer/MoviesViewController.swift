@@ -45,6 +45,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+        tableView.reloadData()
     }
     
     func retrieveMovieInfo() {
@@ -112,8 +113,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        KVNProgress.show()
-
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
         let movie = filteredData![indexPath.row]
@@ -152,6 +151,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         
+        // Use a red color when the user selects the cell
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.blackColor()
+        cell.selectedBackgroundView = backgroundView
+        
         return cell
     }
         
@@ -177,11 +181,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UITableViewCell
-        cell.setSelected(false, animated: true)
+        
+        // Use a red color when the user selects the cell
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.blueColor()
+        cell.selectedBackgroundView = backgroundView
+        
         let indexPath = tableView.indexPathForCell(cell)
     
         let singleMovieViewController = segue.destinationViewController as! SingleMovieViewController
         singleMovieViewController.movie = filteredData![indexPath!.row]
+
     }
 
 }
