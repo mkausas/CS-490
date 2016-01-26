@@ -224,7 +224,7 @@
         <!--List-->
         <scene sceneID="3m8-2B-bSO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uvy-Pw-eCw" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MoviesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="uvy-Pw-eCw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" id="sbk-WS-CaV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="q9C-rk-pkh">
