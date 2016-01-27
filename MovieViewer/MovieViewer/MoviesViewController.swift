@@ -16,7 +16,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [NSDictionary]?
     var endpoint = "now_playing"
@@ -25,21 +25,25 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var networkErrorView: UIView!
     var filteredData: [NSDictionary]?
     
-//    var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
+    var searchBar: UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 300, 44))
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
-        
-//        searchBar.placeholder = "Your placeholder"
-//        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
-//        self.navigationItem.leftBarButtonItem = leftNavBarButton
-        
+        navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
+
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
+        
+        searchBar.placeholder = "Enter Title"
+        searchBar.sizeToFit()
+//        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        
+        self.navigationItem.titleView = searchBar
+        
+
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
