@@ -9,7 +9,7 @@
 import UIKit
 import AFNetworking
 import KVNProgress
-
+import XMSegmentedControl
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
@@ -21,7 +21,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var movies: [NSDictionary]?
     var endpoint = "now_playing"
     
-    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var segmentedUIView: UIView!
     @IBOutlet weak var networkErrorView: UIView!
     var filteredData: [NSDictionary]?
     
@@ -39,11 +39,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         searchBar.placeholder = "Enter Title"
         searchBar.sizeToFit()
-//        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         
         self.navigationItem.titleView = searchBar
         
-
+        let segmentedControl = XMSegmentedControl(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44), segmentTitle: ["List", "Poster"], selectedItemHighlightStyle: XMSelectedItemHighlightStyle.BottomEdge)
+        
+        segmentedControl.backgroundColor = UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1)
+        segmentedControl.highlightColor = UIColor(red: 255/255, green: 155/255, blue: 94/255, alpha: CGFloat(1))
+        segmentedControl.tint = UIColor(white: CGFloat(17), alpha: CGFloat(1))
+        segmentedControl.highlightTint = UIColor(red: 255/255, green: 155/255, blue: 94/255, alpha: CGFloat(1))
+        
+        segmentedUIView.addSubview(segmentedControl)
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -207,7 +213,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func refreshNetworkError(sender: AnyObject) {
         retrieveMovieInfo()
     }
-    
 
     // MARK: - Navigation
 

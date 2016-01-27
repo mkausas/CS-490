@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '165B836423158454B521B08C'
-               BlueprintName = 'KVNProgress'
+               BlueprintIdentifier = '63FB193105C81D73606C55DF'
+               BlueprintName = 'XMSegmentedControl-XMSegmentedControl'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'KVNProgress.framework'>
+               BuildableName = 'XMSegmentedControl.bundle'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

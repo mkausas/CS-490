@@ -19,10 +19,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>XMSegmentedControl-XMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>XMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>0186EE20AB4D310515B8041966DB7AEB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0B7E6025C80368DACEDE52B07767A6A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A54ED0077B3FBC6C39B5E3A96E07301D</key>
+		<key>31893887EDD618ACDFCA33E11A79BE08</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E61B5C0B0FA6866D481F1A95BB828B8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

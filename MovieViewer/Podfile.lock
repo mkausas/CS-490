@@ -15,13 +15,16 @@ PODS:
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - KVNProgress (2.2.2)
+  - XMSegmentedControl (0.1.4)
 
 DEPENDENCIES:
   - AFNetworking
   - KVNProgress
+  - XMSegmentedControl
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   KVNProgress: 4697347e21e37fdaa5264ebc24e377c205a50328
+  XMSegmentedControl: 51cf4f3daf14920692a064d9252aa7b29622dda6
 
 COCOAPODS: 0.39.0
