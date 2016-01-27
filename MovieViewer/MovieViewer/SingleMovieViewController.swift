@@ -22,6 +22,7 @@ class SingleMovieViewController: UIViewController {
     var movie: NSDictionary?
     
     
+    
     override func viewDidLoad() {
         print("loaded new stuff")
         

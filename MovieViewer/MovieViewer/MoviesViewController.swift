@@ -21,12 +21,21 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var movies: [NSDictionary]?
     var endpoint = "now_playing"
     
+    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var networkErrorView: UIView!
     var filteredData: [NSDictionary]?
     
+//    var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
+        
+//        searchBar.placeholder = "Your placeholder"
+//        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+//        self.navigationItem.leftBarButtonItem = leftNavBarButton
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -35,7 +44,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
-
+        tableView.separatorStyle = .None
+        
         dispatch_async(dispatch_get_main_queue()) {
             KVNProgress.show()
         }
@@ -118,6 +128,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let movie = filteredData![indexPath.row]
         let title = movie["title"] as? String
         let overview = movie["overview"] as? String
+        let rating = movie["vote_average"] as! CGFloat
+        
         
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
@@ -156,9 +168,26 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         backgroundView.backgroundColor = UIColor.blackColor()
         cell.selectedBackgroundView = backgroundView
         
+        let multiplier = CGFloat(1 / 10.0)
+        var red: CGFloat = multiplier
+        if (rating >= 0.5) {
+            red *= (10 - rating)
+        } else {
+            red *= rating
+        }
+        
+        let green: CGFloat = rating * multiplier / 1.5
+        
+        let ratingColor = UIColor(red: red, green: green, blue: 0, alpha: 1)
+        cell.ratingLabel.backgroundColor = ratingColor
+        cell.ratingLabel.layer.cornerRadius = 5
+        cell.ratingLabel.clipsToBounds = true
+        cell.ratingLabel.text = "\(rating * 10)%"
+
+        
         return cell
     }
-        
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print("happening")
         filteredData = searchText.isEmpty ? movies : movies!.filter({(currMovie: NSDictionary) -> Bool in
