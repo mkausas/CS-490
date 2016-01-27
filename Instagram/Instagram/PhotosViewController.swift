@@ -9,7 +9,7 @@
 import UIKit
 import AFNetworking
 
-class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate {
 
     var content: [NSDictionary]?
     @IBOutlet weak var tableView: UITableView!
@@ -18,7 +18,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -64,7 +64,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         let imageContent = content![indexPath.row]
         let user = imageContent["user"]
         
-        
         let userName = user!["username"] as! String
         let profileURLString = user!.valueForKey("profile_picture") as! String
         let profilePicUrl = NSURL(string: profileURLString)
@@ -84,7 +83,40 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         cell.likes.text = "\(likes) likes"
         
         
+        
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated:true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let vc = segue.destinationViewController as! PhotoDetailsViewController
+        let indexPath = tableView.indexPathForCell(sender as! CustomCell)
+        let postInfo: NSDictionary? = content![indexPath!.row]
+        
+        if let postInfo = postInfo {
+            let user = postInfo["user"]
+
+            
+            let userName = user!["username"] as! String
+            let profileURLString = user!.valueForKey("profile_picture") as! String
+            let profilePicUrl = NSURL(string: profileURLString)
+            let postURLString = postInfo.valueForKey("images")?.valueForKey("standard_resolution")?.valueForKey("url") as! String
+            let postPicUrl = NSURL(string: postURLString)
+            let likes = postInfo.valueForKey("likes")?.valueForKey("count") as! Int
+            
+            NSLog("\(user)")
+
+            vc.photoURL = postPicUrl
+            vc.profileURL = profilePicUrl
+            
+            print(postPicUrl)
+//            if let url = postPicUrl {
+//                vc.imageView.setImageWithURL(url)
+//            }
+        }
     }
 
 
