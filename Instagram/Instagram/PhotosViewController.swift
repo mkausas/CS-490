@@ -13,7 +13,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
 
     var content: [NSDictionary]?
     @IBOutlet weak var tableView: UITableView!
-    
+    let refreshControl = UIRefreshControl()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +46,19 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 }
         });
         task.resume()
+        
+        // refresh items
+        refreshControl.addTarget(self, action: "refreshControlAction", forControlEvents: .ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+        
     }
     
+    
+    // on refresh load more
+    func refreshControlAction() {
+        loadMoreData()
+        refreshControl.endRefreshing()
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -149,15 +161,11 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                             self.tableView.reloadData()
                     }
                 }
-                
-                // Reload the tableView now that there is new data
-                self.tableView.reloadData()
         });
         task.resume()
     }
     
     var isMoreDataLoading = false
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (!isMoreDataLoading) {
             // Calculate the position of one screen length before the bottom of the results
