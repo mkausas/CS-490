@@ -1,0 +1,3 @@
+[submodule "Yelp"]
+	path = Yelp
+	url = https://github.com/mkausas/Yelp.git
