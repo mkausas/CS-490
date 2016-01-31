@@ -11,12 +11,13 @@ import AFNetworking
 import KVNProgress
 import XMSegmentedControl
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, XMSegmentedControlDelegate {
 
     
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
 //    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var movies: [NSDictionary]?
     var endpoint = "now_playing"
@@ -37,6 +38,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         searchBar.delegate = self
         
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.hidden = true
+        
         searchBar.placeholder = "Enter Title"
         searchBar.sizeToFit()
         
@@ -48,7 +53,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         segmentedControl.highlightColor = UIColor(red: 255/255, green: 155/255, blue: 94/255, alpha: CGFloat(1))
         segmentedControl.tint = UIColor(white: CGFloat(17), alpha: CGFloat(1))
         segmentedControl.highlightTint = UIColor(red: 255/255, green: 155/255, blue: 94/255, alpha: CGFloat(1))
-        
+        segmentedControl.delegate = self
         segmentedUIView.addSubview(segmentedControl)
         
         refreshControl = UIRefreshControl()
@@ -61,6 +66,30 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         retrieveMovieInfo()
         
+    }
+    
+    
+    let LIST = 0
+    let POSTER = 1
+    func xmSegmentedControl(xmSegmentedControl: XMSegmentedControl, selectedSegment: Int) {
+        print("SegmentedControl Selected Segment: \(selectedSegment)")
+        
+        switch selectedSegment {
+        case LIST:
+            tableView.hidden = false
+            collectionView.hidden = true
+            tableView.reloadData()
+            break
+        case POSTER:
+            tableView.hidden = true
+            collectionView.hidden = false
+            collectionView.reloadData()
+            break
+        default:
+            tableView.hidden = false
+            collectionView.hidden = true
+            
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -199,7 +228,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print("happening")
         filteredData = searchText.isEmpty ? movies : movies!.filter({(currMovie: NSDictionary) -> Bool in
             if let title = currMovie["title"] as? String {
                 return title.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
@@ -207,26 +235,84 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             return false
         })
         
+        collectionView.reloadData()
         tableView.reloadData()
     }
 
     @IBAction func refreshNetworkError(sender: AnyObject) {
         retrieveMovieInfo()
     }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let movies = filteredData {
+            return movies.count
+        }
+        
+        return 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionMovieCell", forIndexPath: indexPath) as! CollectionMovieCell
+        
+        let movie = filteredData![indexPath.row]
+        let posterPath = movie["poster_path"] as! String
+        let baseUrl = "http://image.tmdb.org/t/p/w500"
+        let imageUrl = NSURL(string: baseUrl + posterPath)
+        
+        //        cell.movieView.setImageWithURL(imageUrl!)
+        // fade in of images
+        cell.movieView.setImageWithURLRequest(
+            NSURLRequest(URL: imageUrl!),
+            placeholderImage: nil,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                // imageResponse will be nil if the image is cached
+                if imageResponse != nil {
+                    print("Image was NOT cached, fade in image")
+                    cell.movieView.alpha = 0.0
+                    cell.movieView.image = image
+                    UIView.animateWithDuration(1, animations: { () -> Void in
+                        cell.movieView.alpha = 1.0
+                    })
+                } else {
+                    print("Image was cached so just update the image")
+                    cell.movieView.image = image
+                }
+            },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+                // do something for the failure condition
+        })
+        
+        
+        
+        return cell
+    }
+
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! UITableViewCell
+        var indexPath: NSIndexPath?
+        // transition from tableView
+        if let cell = sender as? UITableViewCell {
         
-        // Use a red color when the user selects the cell
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.blueColor()
-        cell.selectedBackgroundView = backgroundView
-        
-        let indexPath = tableView.indexPathForCell(cell)
+            // Use a red color when the user selects the cell
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.blueColor()
+            cell.selectedBackgroundView = backgroundView
+            
+            indexPath = tableView.indexPathForCell(cell)!
     
+        }
+        
+        // transition from collectionView
+        else  {
+            let cell = sender as? UICollectionViewCell
+            indexPath = collectionView.indexPathForCell(cell!)
+            
+        }
+        
         let singleMovieViewController = segue.destinationViewController as! SingleMovieViewController
         singleMovieViewController.movie = filteredData![indexPath!.row]
 

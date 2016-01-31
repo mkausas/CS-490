@@ -14,4 +14,5 @@ class CollectionMovieCell: UICollectionViewCell {
     
     
     
+    
 }

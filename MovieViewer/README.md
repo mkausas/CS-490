@@ -2,7 +2,7 @@
 
 **Flicks** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: 5 hours spent in total
+Time spent: 10 hours spent in total
 
 ## User Stories
 
@@ -27,6 +27,8 @@ The following **additional** features are implemented:
 - [X] Percentage ratings with color changes
 - [X] Displays lang
 - [X] Allows for viewing of tableview and collection view modes
+- [X] Using custom Segmented controller to switch between poster and table view
+- [X] Put search bar into navigation bar 
 
 ## Video Walkthrough 
 
