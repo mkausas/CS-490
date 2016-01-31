@@ -1,0 +1,3 @@
+[submodule "MovieViewer/Yelp"]
+	path = MovieViewer/Yelp
+	url = https://github.com/mkausas/Yelp.git
