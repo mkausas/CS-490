@@ -4,3 +4,6 @@
 [submodule "github-repo-finder"]
 	path = github-repo-finder
 	url = https://github.com/mkausas/github-repo-finder
+[submodule "Twitter-Client"]
+	path = Twitter-Client
+	url = https://github.com/mkausas/Twitter-Client
