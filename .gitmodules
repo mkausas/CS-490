@@ -7,3 +7,6 @@
 [submodule "Twitter-Client"]
 	path = Twitter-Client
 	url = https://github.com/mkausas/Twitter-Client
+[submodule "Parse-Chat-Client"]
+	path = Parse-Chat-Client
+	url = https://github.com/mkausas/Parse-Chat-Client.git
