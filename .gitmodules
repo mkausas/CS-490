@@ -10,3 +10,9 @@
 [submodule "Parse-Chat-Client"]
 	path = Parse-Chat-Client
 	url = https://github.com/mkausas/Parse-Chat-Client.git
+[submodule "Instagram-Ground-Up"]
+	path = Instagram-Ground-Up
+	url = https://github.com/mkausas/Instagram-Ground-Up
+[submodule "Bartender"]
+	path = Bartender
+	url = https://github.com/FoodForThought4/Bartender
