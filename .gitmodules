@@ -16,3 +16,6 @@
 [submodule "Bartender"]
 	path = Bartender
 	url = https://github.com/FoodForThought4/Bartender
+[submodule "Basic-iOS-Animation"]
+	path = Basic-iOS-Animation
+	url = https://github.com/mkausas/Basic-iOS-Animation.git
