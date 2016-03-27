@@ -19,3 +19,6 @@
 [submodule "Basic-iOS-Animation"]
 	path = Basic-iOS-Animation
 	url = https://github.com/mkausas/Basic-iOS-Animation.git
+[submodule "Tinder"]
+	path = Tinder
+	url = https://github.com/mkausas/Tinder.git
