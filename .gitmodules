@@ -22,3 +22,6 @@
 [submodule "Tinder"]
 	path = Tinder
 	url = https://github.com/mkausas/Tinder.git
+[submodule "Canvas-Lab"]
+	path = Canvas-Lab
+	url = https://github.com/mkausas/Canvas-Lab
